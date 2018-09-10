@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, AppRegistry, Text, TextInput, View } from 'react-native';
-
+//comment
 export default class App extends React.Component {
     constructor(props) {
         super(props);
