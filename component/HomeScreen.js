@@ -38,7 +38,7 @@ export default class HomeScreen extends React.Component {
           onPress={() =>
             this.props.navigation.navigate("NewHabit", {
               itemId: 86,
-              otherParam: "anything you want here"
+              otherParam: "anything you want"
             })
           }
         >
