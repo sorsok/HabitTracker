@@ -1,96 +1,8 @@
 import React from "react";
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  Button,
-  Alert,
-  StatusBar,
-  TouchableOpacity
-} from "react-native";
+import HomeScreen from "./component/HomeScreen";
+import NewHabitScreen from "./component/NewHabitScreen";
 import { createStackNavigator } from "react-navigation";
-
-class NewHabitScreen extends React.Component {
-  static navigationOptions = {
-    title: "Add New Habit",
-    headerStyle: {
-      backgroundColor: "#f4511e"
-    },
-    headerTintColor: "#fff",
-    headerTitleStyle: {
-      fontWeight: "bold"
-    }
-  };
-
-  render() {
-    const itemId = this.props.navigation.getParam("itemId", "NO-ID");
-    const otherParam = this.props.navigation.getParam(
-      "otherParam",
-      "some default value"
-    );
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>New Habit Screen</Text>
-        <Text>{itemId + ": " + otherParam}</Text>
-        <Button
-          title="Go back"
-          onPress={() => this.props.navigation.goBack()}
-        />
-      </View>
-    );
-  }
-}
-
-class HomeScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { text: "" };
-  }
-  static navigationOptions = {
-    title: "Home"
-  };
-
-  render() {
-    return (
-      <SafeAreaView style={styles.container}>
-        <StatusBar barStyle="dark-content" backgroundColor="yellowgreen" />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            this.props.navigation.navigate("NewHabit", {
-              itemId: 86,
-              otherParam: "anything you want here"
-            })
-          }
-        >
-          <Text style={{ fontSize: 20 }}> + </Text>
-        </TouchableOpacity>
-        <TextInput
-          style={styles.container}
-          placeholder="Type here to translate!"
-          onChangeText={text => this.setState({ text })}
-          returnKeyType="done"
-        />
-        <Text style={styles.container}>
-          {this.state.text
-            .split(" ")
-            .map(word => word && "🍕")
-            .join(" ")}
-        </Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            Alert.alert("You tapped the button!");
-          }}
-        >
-          <Text>Press Me</Text>
-        </TouchableOpacity>
-      </SafeAreaView>
-    );
-  }
-}
+import { StyleSheet } from "react-native";
 
 const RootStack = createStackNavigator(
   {
@@ -98,7 +10,7 @@ const RootStack = createStackNavigator(
     NewHabit: NewHabitScreen
   },
   {
-    headerMode: "none",
+    //headerMode: "none",
     initialRouteName: "Home"
   }
 );
@@ -108,11 +20,10 @@ export default class App extends React.Component {
     return <RootStack />;
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "yellowgreen",
+    backgroundColor: "#DBFEB8",
     alignItems: "center",
     justifyContent: "center"
   },
