@@ -1,35 +1,25 @@
 {
-  "name": "HabitTracker",
-  "version": "0.1.0",
+  "name": "my-new-project",
+  "main": "node_modules/expo/AppEntry.js",
   "private": true,
-  "devDependencies": {
-    "babel-preset-react-native-stage-0": "^1.0.1",
-    "jest": "^23.6.0",
-    "jest-react-native": "^18.0.0",
-    "react-test-renderer": "16.3.1"
-  },
   "scripts": {
-    "start": "react-native start",
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "test": "jest",
-    "precommit": "lint-staged"
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "eject": "expo eject",
+    "test": "node ./node_modules/jest/bin/jest.js --watchAll"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "jest-expo"
   },
   "dependencies": {
-    "husky": "^0.14.3",
-    "lint-staged": "^7.2.2",
-    "prettier": "^1.14.2",
+    "@expo/samples": "2.1.1",
+    "expo": "^30.0.1",
     "react": "16.3.1",
-    "react-native": "~0.55.2",
-    "react-navigation": "^2.13.0"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
+    "react-navigation": "^2.16.0"
   },
-  "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
-      "prettier --single-quote --write",
-      "git add"
-    ]
+  "devDependencies": {
+    "jest-expo": "30.0.0"
   }
 }
