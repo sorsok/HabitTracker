@@ -5,7 +5,9 @@ import {
   TextInput,
   Alert,
   StatusBar,
-  TouchableOpacity
+  View,
+  TouchableOpacity,
+  Image
 } from "react-native";
 import styles from "./Styles";
 
@@ -13,22 +15,26 @@ import styles from "./Styles";
 export default class HabitButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { text: "" };
   }
 
   render() {
+    let buttonStyle = styles.button1;
+    if (this.props.id%2 === 1){
+      buttonStyle = styles.button2;
+    }
     return (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            this.props.navigation.navigate("NewHabit", {
-              itemId: 86,
-              otherParam: "anything you want"
-            })
-          }
-        >
-          <Text> this.props.name </Text>
+      <View style = {styles.container}>
+        <TouchableOpacity style = {buttonStyle}>
+          <Text style = {styles.bodyText}>
+            {this.props.name}
+          </Text>
+          <Image
+            style = {styles.image}
+            source = {require('../assets/images/caffeine.png')}
+            resizeMode={"contain"}
+          />
         </TouchableOpacity>
+      </View>
     );
   }
 }

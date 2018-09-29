@@ -8,9 +8,9 @@
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/chakra_icon.png",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/chakra_splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

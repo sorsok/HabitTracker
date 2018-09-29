@@ -1,11 +1,13 @@
 import React from "react";
 import {
   SafeAreaView,
+  View,
   Text,
   TextInput,
   Alert,
   StatusBar,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from "react-native";
 import styles from "./Styles";
 import NewHabitScreen from "./NewHabitScreen";
@@ -15,75 +17,68 @@ import HabitButton from "./HabitButton";
 export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.setState({
-      habits: ["Caffeine", "Nicotine", "Sugar"]
+    this.ROW_SIZE = 2;
+    this.state = ({
+      habits: ["Caffeine", "Nicotine", "Sugar", "TV", "Gaming", "Working Out"]
     })
   }
-  static navigationOptions = {
-    title: "Home",
-    headerStyle: {
-      backgroundColor: "#f4511e"
-    },
-    headerTintColor: "#fff",
-    headerTitleStyle: {
-      fontWeight: "bold"
-    }
-  };
+
   renderHabitButton(i) {
     return (
       <HabitButton
         key={i}
+        id = {i}
         name={this.state.habits[i]}
-        onClick={() => this.state.onClick(i)}
       />
     );
   }
-  render() {
-    let habitCount = 0;
-    const habits_component = [];
+  renderAddNewHabitButton(){
+    return (
+      <HabitButton
+        key={this.state.habits.length}
+        id = {i}
+        name={"Add New"}
+      />
+    );
 
-    for (let i = 0; i < Math.pow(this.props.habits.length, 0.5); i++) {
-      let row = [];
-      for (let j = 0; j < Math.pow(this.props.habits.length, 0.5); j++) {
-        row.push(this.renderHabitButton(habitCount));
-        squareCount++;
+  }
+  renderRow(n){
+    const row = [];
+    let rowStyle = styles.row1;
+    for (let i = n*this.ROW_SIZE; i < n*this.ROW_SIZE + this.ROW_SIZE; i++) {
+      if (i === this.state.habits.length){
+        row.push(this.renderAddNewHabitButton())
       }
-      habits_component.push(
-        <div key={i} className="board-row">
-          {row}
-        </div>
-      );
+      else{
+        row.push(this.renderHabitButton(i));
+      }
+    }
+    if (n%2==1){
+      rowStyle = styles.row2;
+    }
+    return (
+      <View
+        style = {rowStyle}
+        key = {n}>
+        {row}
+      </View>
+    );
+  }
+  render() {
+    let habits_component = [];
+    for (let i = 0; i < Math.ceil(this.state.habits.length/this.ROW_SIZE); i++) {
+      habits_component.push(this.renderRow(i));
     }
     return (
       <SafeAreaView style={styles.screen}>
-        <StatusBar barStyle="dark-content" />
-        <div>{habits_component}</div>;
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            this.props.navigation.navigate("NewHabit", {
-              itemId: 86,
-              otherParam: "anything you want"
-            })
-          }
-        >
-          <Text style={{ fontSize: 20 }}> + </Text>
-        </TouchableOpacity>
-        <TextInput
-          style={styles.container}
-          placeholder="Type here to translate!"
-          onChangeText={text => this.setState({ text })}
-          returnKeyType="done"
-        />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            Alert.alert("hi user");
-          }}
-        >
-          <Text>Press Here</Text>
-        </TouchableOpacity>
+        <View style = {styles.container}>
+          <Text style = {styles.headerText}>
+            Habits
+          </Text>
+        </View>
+        <View style = {styles.habits}>
+            {habits_component}
+        </View>
       </SafeAreaView>
     );
   }
